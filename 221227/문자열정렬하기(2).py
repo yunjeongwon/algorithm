@@ -5,3 +5,4 @@ def solution(my_string):
         lst[i] = lst[i].lower()
     lst.sort()
     return ''.join(lst)
+    
