@@ -1,43 +1,21 @@
-K, D, N = input().split()
+dic = {'R': [1, 0], 'L': [-1, 0], 'B': [0, -1], 'T': [0, 1], 'RT': [1, 1], 'LT': [-1, 1], 'RB': [1, -1], 'LB': [-1, -1]}
+king, stone, N = input().rstrip().split()
 N = int(N)
-G = [[0] * 8 for _ in range(8)]
-dict = { "R" : [0, 1], "L" : [0, -1], "B" : [1, 0], "T" : [-1, 0], "RT" : [1, -1], "LT" : [-1, -1], "RB" : [1, 1], "LB" : [1, -1] }
-
-def f(strV, n):
-    a1, a2 = strV
-    a2 = int(a2)
-    a1 = ord(a1) - ord("A")
-    a2 = 8 - a2
-    G[a2][a1] = n
-f(K, 1)
-f(D, 2)
-
-def find(curD):
-    for cr in range(8):
-        for cc in range(8):
-            if G[cr][cc] == 1:
-                dr, dc = dict[curD]
-                nr, nc = cr + dr, cc + dc
-                if nr >= 8 or nr < 0 or nc >= 8 or nc < 0:
-                    return
-                if G[nr][nc] == 2:
-                    if nr + dr >= 8 or nr + dr < 0 or nc + dc >= 8 or nc + dc < 0:
-                        return
-                    G[nr + dr][nc + dc] = 2
-                G[cr][cc] = 0
-                G[nr][nc] = 1
-                return
-
+k = list(map(int, [ord(king[0]) - ord("A") + 1, king[1]]))
+s = list(map(int, [ord(stone[0]) - ord("A") + 1, stone[1]]))
 for _ in range(N):
-    curD = input().rstrip()
-    find(curD)
-# print(G)
-def re(n):
-    for i in range(8):
-        for k in range(8):
-            if G[i][k] == n:
-                cr = 8 - i
-                cc = chr(k + ord("A"))
-                return cc + str(cr)
-print(re(1))
-print(re(2))
+    d = input().rstrip()
+    nx = k[0] + dic[d][0]
+    ny = k[1] + dic[d][1]
+    if 1 <= nx <= 8 and 1 <= ny <= 8:
+        if nx == s[0] and ny == s[1]:
+            nnx = s[0] + dic[d][0]
+            nny = s[1] + dic[d][1]
+            if 1 <= nnx <= 8 and 1 <= nny <= 8:
+                k = [nx, ny]
+                s = [nnx, nny]
+        else:
+            k = [nx, ny]
+
+print(f'{chr(k[0] + ord("A") - 1)}{k[1]}')
+print(f'{chr(s[0] + ord("A") - 1)}{s[1]}')
