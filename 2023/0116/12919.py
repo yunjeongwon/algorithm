@@ -34,3 +34,28 @@ def f(strV):
 ans = 0
 f(s)
 print(ans)
+
+
+# 거꾸로 푸는 풀이
+import sys
+input = sys.stdin.readline
+
+s = input().rstrip()
+t = input().rstrip()
+
+def f(strV):
+    global ans
+    if strV == s:
+        ans = 1
+        return
+    if len(strV) == 0:
+        return
+    if strV[-1] == "A":
+        f(strV[:len(strV) - 1])
+    if strV[0] == "B":
+        f(strV[1:][::-1])
+
+ans = 0
+f(t)
+print(ans)
+
