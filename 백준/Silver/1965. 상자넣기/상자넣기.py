@@ -6,7 +6,7 @@ arr = list(map(int, input().split()))
 
 dp = []
 dp.append(arr[0])
-ans = 0
+ans = 1
 for i in range(1, n):
     if dp[-1] >= arr[i]:
         idx = 0
