@@ -14,7 +14,10 @@ i = 0
 while i < m - len(p) + 1:
     for j in range(len(p)):
         if s[i + j] != p[j]:
-            i += 1
+            if j == 0:
+                i += 1
+            else:
+                i += j
             break
     else:
         ans += 1
