@@ -8,19 +8,16 @@ s = input().rstrip()
 p = 'I'
 for _ in range(n):
     p += 'OI'
-
 ans = 0
-cnt = 0
-i = 0
-while i < m - 1:
-    if s[i: i + 3] == 'IOI':
-        i += 2
-        cnt += 1
-        if cnt == n:
-            ans += 1
-            cnt -= 1
+l = 0
+r = len(p)
+while l < m - len(p) + 1:
+    if s[l:r] == p:
+        ans += 1
+        l += 2
+        r += 2
     else:
-        i += 1
-        cnt = 0
+        l += 1
+        r += 1
 
 print(ans)
